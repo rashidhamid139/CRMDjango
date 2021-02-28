@@ -1,0 +1,10 @@
+
+
+steps:--
+- task: OneLuckiDev.jsontovariable.vsts-json-to-variable.OneLuckiDevJson2Variable@1
+  displayName: 'JSONTOVARIABLE'
+  inputs:
+    jsonFile: '--example.json--'
+    shouldPrefixVariables: true
+    variablePrefix: prefixNameHere
+    
