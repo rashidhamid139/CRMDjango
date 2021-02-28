@@ -1,9 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import User, Lead, Agent
 # Create your views here.
-def home_page(request):
+def lead_list(request):
+    leads = Lead.objects.all()
     context = {
-        "name": "joe",
-        "age": 35
+        "leads": leads,
     }
-    return render(request, 'leads/home_page.html', context)
+    return render(request, 'leads/lead_list.html', context)
+
+
+def lead_detail(request, pk):
+    print(pk)
+    lead = Lead.objects.get(pk=pk)
+    print(lead)
+    context = {
+        "lead": lead
+    }
+    return render(request, 'leads/lead_detail.html', context)

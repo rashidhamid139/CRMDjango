@@ -8,10 +8,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     <title>{% block title %}DJ CRM {% endblock %}</title>
+    <style>
+    .lead {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 6px;
+        padding-right: 6px;
+        margin-top: 10px;
+        background-color: #f6f6f6;
+        width: 100%;
+    }
+    </style>
 </head>
 <body>
-    <h1 class="title">Hello World</h1>
-    <p>Here is our custom Html template</p>
-    {{name}} {{age}}
+    <h1 class="title">Lead List</h1>
+    <p>lead detail</p>
+    <div class="lead">
+        {{lead.first_name}}  {{ lead.age}}
+    </div>
 </body>
 </html>
