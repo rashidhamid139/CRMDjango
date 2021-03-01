@@ -1,5 +1,5 @@
 trigger:
-  - main
+  - master
 
 variables:
   imageName: "pythonsample:$(Build.BuildId)"
@@ -8,19 +8,19 @@ steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: 3.5
-      architecture: 'x64'
+      architecture: "x64"
 
   - task: PythonScript@0
-    displayName: 'Export Project Path'
+    displayName: "Export Project Path"
     inputs:
-      scriptSource: 'inline'
+      scriptSource: "inline"
       script: |
         """Search all directories for manage.py"""
         from glob import iglob
         from os import path 
         #python >=3.5
-         manage_py = next(iglob(path.join('**', 'manage.py'), recursive=True), None)
-         print(manage_py)
+        manage_py = next(iglob(path.join('**', 'manage.py'), recursive=True), None)
+        print(manage_py)
         if not manage_py:
           raise SystemExit('Could not find a Django project')
         project_location = path.dirname(path.abspath(manage_py))
@@ -31,16 +31,16 @@ steps:
       python -m pip install --upgrade pip setuptools wheel django 
       pip install -r requirements.txt
       pip install unittest-xml-reporting
-    displayName: 'Install Prerequisite'
+    displayName: "Install Prerequisite"
 
   - script: |
       pushd '$(projectRoot)'
-      python manage.py test --testrunner  xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input 
+      python manage.py test --testrunner  xmlrunner.extra.djangotestrunner.XMLTestRunner --no-input
     condition: succeededOrFailed()
-    displayName: 'Run tests'
+    displayName: "Run tests"
 
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
       testResultsFiles: "**/TEST-*.xml"
-      testRunTitle: 'Python $(PYTHON_VERSION)'
+      testRunTitle: "Python $(PYTHON_VERSION)"

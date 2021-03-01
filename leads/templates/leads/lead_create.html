@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
-    <title>{% block title %}DJ CRM {% endblock %}</title>
+    <title>{% block title %}Lead Create | {% endblock %}</title>
     <style>
     .lead {
         padding-top: 10px;
@@ -21,13 +21,13 @@
     </style>
 </head>
 <body>
-    <a href="{% url 'leads:lead_create' %}">Create New Lead</a>
-    <h1 class="title">Lead List</h1>
-    <p>Here is our custom Html template</p>
-    {% for lead in leads %}
-        <div class="lead">
-            <a href="{% url 'leads:lead_detail' lead.id %}" >{{ lead.first_name }} {{ lead.last_name}}</a>
-        </div>
-    {% endfor %}
+    <a class="is-dark is-uppercase" href="{% url 'leads:leads' %}">Lead List</a>
+    <h1 class="title">Create a new Lead</h1>
+    <form method="POST" action=".">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
 </body>
 </html>
