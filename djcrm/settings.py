@@ -9,9 +9,18 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import environ 
 from pathlib import Path
 
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env()
+
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '==eburu_piym*4e2dyo16o4n_0q(@b6lfbjapp*ydp#+p4)=pm'
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = '==eburu_piym*4e2dyo16o4n_0q(@b6lfbjapp*ydp#+p4)=pm'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'leads',
+    'agents',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +142,4 @@ AUTH_USER_MODEL = "leads.User"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_REDIRECT_URL = "/leads"
+LOGIN_URL = '/login/'

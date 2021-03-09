@@ -1,0 +1,13 @@
+{% extends "leads/base.html" %}
+
+{% block content %}
+    <a class="is-dark is-uppercase" href="{% url 'agents:agents' %}">Go back to agents</a>
+    <h1 class="title">Create a new Lead</h1>
+    <form method="POST" action=".">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+
+{% endblock %}
